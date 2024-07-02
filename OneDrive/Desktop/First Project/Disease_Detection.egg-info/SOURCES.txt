@@ -1,0 +1,5 @@
+setup.py
+Disease_Detection.egg-info/PKG-INFO
+Disease_Detection.egg-info/SOURCES.txt
+Disease_Detection.egg-info/dependency_links.txt
+Disease_Detection.egg-info/top_level.txt

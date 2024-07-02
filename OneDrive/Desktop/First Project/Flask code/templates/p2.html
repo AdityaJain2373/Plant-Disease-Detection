@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Model Website</title>
+</head>
+<body>
+    <h1>Upload an image</h1><br><br>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"><br><br>
+        <input type="submit" value="Predict">
+    </form>
+    <div id="result"></div>
+
+    <script>
+
+        document.querySelector('form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            let formData = new FormData();
+            formData.append('file', document.querySelector('input[type="file"]').files[0]);
+
+            let response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            let result = await response.json();
+            document.getElementById('result').innerHTML = `
+                <p>Predicted Class: ${result.class}</p>
+                <p>Confidence: ${result.confidence.toFixed(4)}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
